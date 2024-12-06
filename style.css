@@ -1,0 +1,85 @@
+html, body {
+    height: 100%;
+}
+
+.Parent {
+    position: relative;
+    width: 75%;
+    height: 75%;
+    background-color: aquamarine;
+}
+
+.Child {
+    position: absolute;
+    width: 50px;  /* Fixed width */
+    height: 50px; /* Same as width to make it square */
+    top: 50%;     /* Center vertically */
+    left: 50%;    /* Center horizontally */
+}
+
+.Child1 {
+    background-color: blue;
+    animation:bottom-right 5s ease-in-out forwards 
+}
+
+.Child2 {
+    background-color: chartreuse;
+    transform: translate(-100%, -100%); /* Adjust for true centering */
+    animation:upper-left 5s ease-in-out forwards 
+}
+
+.Child3 {
+    background-color: darkgoldenrod;
+    transform: translate(0, -100%); /* Adjust for true centering */
+    animation:upper-right 5s ease-in-out forwards 
+}
+
+.Child4 {
+    background-color: darkslateblue;
+    transform: translate(-100%, 0); /* Adjust for true centering */
+    animation:lower-left 5s ease-in-out forwards 
+}
+
+@keyframes bottom-right {
+    50% {
+        transform: scale(2);
+    }
+   to {
+        top: 100%;
+        left: 100%;
+        transform: translate(-100%, -100%) scale(1);
+    }
+}
+
+@keyframes upper-left {
+    50% {
+        transform: scale(2);
+    }
+    to {
+        top: 0;
+        left: 0;
+        transform: translate(0,0) scale(1); 
+    }
+}
+
+@keyframes lower-left {
+    50% {
+        transform: scale(2);
+    }
+    to {
+        top: 100%;
+        left: 0;
+        transform: translate(0, -100%) scale(1);
+    }
+}
+
+@keyframes upper-right {
+    50% {
+        transform: scale(2);
+    }
+    to {
+        top: 0;
+        left: 100%;
+        transform: translate(-100%, 0) scale(1);
+    }
+}
