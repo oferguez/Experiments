@@ -1,6 +1,3 @@
-// const { AnimationController } = require('./animationControl.js');
-import { AnimationController } from './AnimationController.js';
-
 function PlayAnimation()
 {
     console.log('restart animation');
@@ -8,9 +5,42 @@ function PlayAnimation()
     controller.play();
 }
 
-function StopAnimation()
+function PauseAnimation()
 {
-    console.log('stop animation');
+    console.log('pause animation');
     const controller = new AnimationController('.Child');
-    controller.StopAnimation();
+    controller.pause();
+}
+
+function ResetAnimation()
+{
+    console.log('reset animation');
+    const controller = new AnimationController('.Child');
+    controller.reset();
+}
+
+
+function SayHi()
+{
+    console.log('Hi');
+}
+ 
+
+class AnimationController {
+    constructor(selector) {
+        this.elements = document.querySelectorAll(selector);
+    }
+
+    play() {
+        this.elements.forEach( e => ((e.getAnimations())[0]).play() );
+    }
+
+    pause() {
+        this.elements.forEach( e => e.getAnimations()[0].pause() );
+    }
+
+    reset() {
+        this.animation.cancel();
+        this.animation.play();
+    }
 }
