@@ -34,16 +34,28 @@ const colors = [
  
 
 
-function setRandomFwStyle(fwStyle)
+function setRandomFwStyle(fw)
 { 
-    let size = Math.floor(Math.random() * 70) + 30;
+    let fwStyle = fw.style;
+
+    let size = Math.floor(Math.random() * 70) + 60;
     fwStyle.width = `${size+1}px`;
-    fwStyle.height = `${size+1}px`;
-  
+    fwStyle.height = `${size+1}px`; 
     let randomIndex = Math.floor(Math.random() * colors.length);
     randomColor = colors[randomIndex].toLowerCase();
     let randomTransparency = Math.floor(40 + 20*Math.random());
-  
+
+    let computedFwStyle = window.getComputedStyle(fw);
+    animationLen = 5;
+    randomRepeats = 2 + Math.floor(5*Math.random()); // 2__6
+    seqLen = animationLen / randomRepeats;
+    let parts = computedFwStyle.animation.split(' ');
+    parts[1] = `${animationLen}s`;
+    parts[3] = `${randomRepeats}`;
+    // Rejoin the string with spaces
+    fwStyle.animation = updatedAnimationString = parts.join(' ');
+    
+      
     fwStyle.background = `radial-gradient(circle, ${randomColor} ${100-randomTransparency}%, transparent ${randomTransparency}%)`;
 }
 
@@ -61,8 +73,8 @@ function GetGoing()
         let ChildClass = 1 + fw%4;
         firework.classList.add('Child', `Child${ChildClass}`);
         firework.id = `Child${fw}`;
-        setRandomFwStyle(firework.style);
         parent.appendChild(firework);
+        setRandomFwStyle(firework);
     }
 }
 
