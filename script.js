@@ -24,23 +24,25 @@ function SayHi()
 {
     console.log('Hi');
 }
- 
+
 
 class AnimationController {
     constructor(selector) {
-        this.elements = document.querySelectorAll(selector);
+        this.animations = Array.from(document.querySelectorAll(selector))
+            .map(e => e.getAnimations()[0])
+            .filter(a => a !== undefined);
     }
 
     play() {
-        this.elements.forEach( e => ((e.getAnimations())[0]).play() );
+        this.animations.forEach( a => a.play() );
     }
 
     pause() {
-        this.elements.forEach( e => e.getAnimations()[0].pause() );
+        this.animations.forEach( a => a.pause() );
     }
 
     reset() {
-        this.animation.cancel();
-        this.animation.play();
+        this.animations.forEach( a => a.cancel() );
+        this.animations.forEach( a => a.play() );
     }
 }
