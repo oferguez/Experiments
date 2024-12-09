@@ -51,7 +51,7 @@ function setRandomFwStyle(fw)
     seqLen = animationLen / randomRepeats;
     let parts = computedFwStyle.animation.split(' ');
     parts[1] = `${animationLen}s`;
-    parts[3] = `${randomRepeats}`;
+    parts[4] = `${randomRepeats}`;
     // Rejoin the string with spaces
     fwStyle.animation = updatedAnimationString = parts.join(' ');
     
