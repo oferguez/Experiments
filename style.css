@@ -17,26 +17,26 @@ html, body {
     left: 50%;    /* Center horizontally */
 }
 
-.Child1 {
+/*👉.Child1 {
     background-color: blue;
     animation:bottom-right 1s 1 ease-in-out forwards 
 }
 
 .Child2 {
     background-color: chartreuse;
-    transform: translate(-100%, -100%); /* Adjust for true centering */
+    transform: translate(-100%, -100%); ➡ Adjust for true centering ⬅
     animation:upper-left 1s 1 ease-in-out forwards 
 }
 
 .Child3 {
     background-color: darkgoldenrod;
-    transform: translate(0, -100%); /* Adjust for true centering */
+    transform: translate(0, -100%); ➡ Adjust for true centering ⬅
     animation:upper-right 1s 1 ease-in-out forwards 
 }
 
 .Child4 {
     background-color: darkslateblue;
-    transform: translate(-100%, 0); /* Adjust for true centering */
+    transform: translate(-100%, 0); ➡ Adjust for true centering ⬅
     animation:lower-left 1s 1 ease-in-out forwards 
 }
 
@@ -91,3 +91,4 @@ html, body {
         opacity: 0;
     }
 }
+👈*/
