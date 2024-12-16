@@ -25,7 +25,6 @@ function GetGoing() {
     fwExtravaganza.fireAll();
 }
 
-
 class AnimationController {
     constructor(selector) {
         this.animations = Array.from(document.querySelectorAll(selector))
@@ -128,7 +127,6 @@ class FireworkExtravaganza {
         let randomTransparency = Math.floor(40 + 20*Math.random());
         
         fwStyle.background = `radial-gradient(circle, ${randomColor} ${100-randomTransparency}%, transparent ${randomTransparency}%)`;
-
 
         fwStyle.left = `${positioning.startPos.x}px`;
         fwStyle.top = `${positioning.startPos.y}px`;
