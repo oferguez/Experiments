@@ -123,7 +123,7 @@ class FireworkExtravaganza {
 
         fwStyle.width = `${positioning.size+1}px`;
         fwStyle.height = `${positioning.size+1}px`; 
-        let randomIndex = Math.floor(Math.random() * colors.length);
+        let randomIndex = Math.floor(Math.random() * this.colors.length);
         let randomColor = this.colors[randomIndex].toLowerCase();
         let randomTransparency = Math.floor(40 + 20*Math.random());
         
