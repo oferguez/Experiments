@@ -23,8 +23,12 @@ jobs:
         run: |
           echo "Building site for branch $GITHUB_REF_NAME"
           if [ "$GITHUB_REF_NAME" == "main" ]; then
+            echo "-------------------- b ---------------"
+            ls -lR
             mkdir -p public/stable
             find . -maxdepth 1 -type f -exec cp {} public/stable/ \;  # Copy only files
+            echo "-------------------- a ---------------"
+            ls -lR
           elif [ "$GITHUB_REF_NAME" == "wip" ]; then
             mkdir -p public/wip
             find . -maxdepth 1 -type f -exec cp {} public/wip/ \;  # Copy only files
