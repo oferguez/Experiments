@@ -24,10 +24,10 @@ jobs:
           echo "Building site for branch $GITHUB_REF_NAME"
           if [ "$GITHUB_REF_NAME" == "main" ]; then
             mkdir -p public/stable
-            cp -r * public/stable
+            cp * public/stable
           elif [ "$GITHUB_REF_NAME" == "wip" ]; then
             mkdir -p public/wip
-            cp -r * public/wip
+            cp * public/wip
           fi
 
       # Deploy to the gh-pages branch
