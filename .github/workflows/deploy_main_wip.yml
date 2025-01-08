@@ -27,7 +27,8 @@ jobs:
       # Step 3: Copy build output to the appropriate directory
       - name: Prepare deployment
         run: |
-          echo "Building site for branch: $GITHUB_REF_NAME"
+          echo "gh-pages before Building site for branch: $GITHUB_REF_NAME"
+          ls -lR
           if [ "$GITHUB_REF_NAME" == "main" ]; then
             echo MAIN
             mkdir -p gh-pages/public/stable
@@ -39,6 +40,7 @@ jobs:
           else
             echo NONE
           fi
+          echo "gh-pages after Building site for branch: $GITHUB_REF_NAME"
           ls -lR
 
       # Step 4: Commit and push changes
