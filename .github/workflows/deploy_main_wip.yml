@@ -22,9 +22,9 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git clone --branch gh-pages https://github.com/${{ github.repository }} gh-pages
-          echo "after cloning gh-pages branch:"
-          pwd
-          ls -lR
+          # echo "after cloning gh-pages branch:"
+          # pwd
+          # ls -lR
 
       # Step 3: Copy build output to the appropriate directory
       - name: Prepare deployment
@@ -38,16 +38,16 @@ jobs:
             mkdir -p gh-pages/wip
             find . -maxdepth 1 -type f -exec cp {} gh-pages/wip/ \;  # Copy only files
           else
-            echo NONE
+            echo Error: publishing should be done from either main or wip
           fi
-          echo "gh-pages after Building site for branch: $GITHUB_REF_NAME"
-          pwd
-          ls -lR
+          # echo "gh-pages after Building site for branch: $GITHUB_REF_NAME"
+          # pwd
+          # ls -lR
 
         # Step 4: Commit and push changes
       - name: Commit and push
         run: |
-            pwd
+            # pwd
             cd gh-pages
             # Configure Git to use the GitHub token for authentication
             git config --global user.name "github-actions[bot]"
