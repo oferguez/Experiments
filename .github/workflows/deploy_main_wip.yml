@@ -43,11 +43,15 @@ jobs:
           echo "gh-pages after Building site for branch: $GITHUB_REF_NAME"
           ls -lR
 
-      # Step 4: Commit and push changes
+        # Step 4: Commit and push changes
       - name: Commit and push
         run: |
-          git config --list --show-origin
-          cd gh-pages
-          git add .
-          git commit -m "Update GitHub Pages for $GITHUB_REF_NAME"
-          git push origin gh-pages
+            # Configure Git to use the GitHub token for authentication
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+            cd gh-pages
+            git add .
+            git commit -m "Update GitHub Pages for $GITHUB_REF_NAME"
+            git push origin gh-pages
+
