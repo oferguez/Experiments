@@ -23,6 +23,8 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git clone --branch gh-pages https://github.com/${{ github.repository }} gh-pages
           mkdir -p gh-pages/public
+          echo "after cloning gh-pages branch:"
+          ls -lR
 
       # Step 3: Copy build output to the appropriate directory
       - name: Prepare deployment
