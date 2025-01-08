@@ -27,12 +27,12 @@ jobs:
       # Step 3: Copy build output to the appropriate directory
       - name: Prepare deployment
         run: |
-          echo "Building site for branch $GITHUB_REF_NAME"
-          if [ "$GITHUB_REF_NAME" == "refs/heads/main" ]; then
+          echo "Building site for branch: $GITHUB_REF_NAME"
+          if [ "$GITHUB_REF_NAME" == "main" ]; then
             echo MAIN
             mkdir -p gh-pages/public/stable
             find . -maxdepth 1 -type f -exec cp {} gh-pages/public/stable/ \;  # Copy only files
-          elif [ "$GITHUB_REF_NAME" == "refs/heads/wip" ]; then
+          elif [ "$GITHUB_REF_NAME" == "wip" ]; then
             echo WIP
             mkdir -p gh-pages/public/wip
             find . -maxdepth 1 -type f -exec cp {} gh-pages/public/wip/ \;  # Copy only files
