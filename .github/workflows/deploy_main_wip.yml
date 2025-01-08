@@ -22,8 +22,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git clone --branch gh-pages https://github.com/${{ github.repository }} gh-pages
-          mkdir -p gh-pages/public
           echo "after cloning gh-pages branch:"
+          pwd
           ls -lR
 
       # Step 3: Copy build output to the appropriate directory
@@ -31,16 +31,17 @@ jobs:
         run: |
           if [ "$GITHUB_REF_NAME" == "main" ]; then
             echo MAIN
-            mkdir -p gh-pages/public/stable
-            find . -maxdepth 1 -type f -exec cp {} gh-pages/public/stable/ \;  # Copy only files
+            mkdir -p gh-pages/stable
+            find . -maxdepth 1 -type f -exec cp {} gh-pages/stable/ \;  # Copy only files
           elif [ "$GITHUB_REF_NAME" == "wip" ]; then
             echo WIP
-            mkdir -p gh-pages/public/wip
-            find . -maxdepth 1 -type f -exec cp {} gh-pages/public/wip/ \;  # Copy only files
+            mkdir -p gh-pages/wip
+            find . -maxdepth 1 -type f -exec cp {} gh-pages/wip/ \;  # Copy only files
           else
             echo NONE
           fi
           echo "gh-pages after Building site for branch: $GITHUB_REF_NAME"
+          pwd
           ls -lR
 
         # Step 4: Commit and push changes
@@ -52,8 +53,8 @@ jobs:
             git config --global user.name "github-actions[bot]"
             git config --global user.email "github-actions[bot]@users.noreply.github.com"
             git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-            git config --list --show-origin
+            COMMIT_HASH=$(git rev-parse --short HEAD)
             git add .
-            git commit -m "Update GitHub Pages for $GITHUB_REF_NAME"
+            git commit -m "Update GitHub Pages for branch=$GITHUB_REF_NAME hash=$COMMIT_HASH"
             git push origin gh-pages
 
