@@ -23,15 +23,23 @@ jobs:
         run: |
           echo "Building site for branch $GITHUB_REF_NAME"
           if [ "$GITHUB_REF_NAME" == "main" ]; then
-            echo "-------------------- b ---------------"
+            echo "-------------------- b main ---------------"
             ls -lR
+            echo "-------------------- b main ---------------"
             mkdir -p public/stable
             find . -maxdepth 1 -type f -exec cp {} public/stable/ \;  # Copy only files
             echo "-------------------- a ---------------"
             ls -lR
+            echo "-------------------- a ---------------"
           elif [ "$GITHUB_REF_NAME" == "wip" ]; then
+            echo "-------------------- b wip ---------------"
+            ls -lR
+            echo "-------------------- b wip ---------------"
             mkdir -p public/wip
             find . -maxdepth 1 -type f -exec cp {} public/wip/ \;  # Copy only files
+            echo "-------------------- a wip ---------------"
+            ls -lR
+            echo "-------------------- a wip ---------------"
           fi          
 
       # Deploy to the gh-pages branch
@@ -40,5 +48,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: public
-          publish_branch: gh-publish
+          publish_branch: gh-pages
           keep_files: true
