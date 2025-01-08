@@ -29,8 +29,6 @@ jobs:
       # Step 3: Copy build output to the appropriate directory
       - name: Prepare deployment
         run: |
-          echo "gh-pages before Building site for branch: $GITHUB_REF_NAME"
-          ls -lR
           if [ "$GITHUB_REF_NAME" == "main" ]; then
             echo MAIN
             mkdir -p gh-pages/public/stable
@@ -48,6 +46,7 @@ jobs:
       # Step 4: Commit and push changes
       - name: Commit and push
         run: |
+          git config --list --show-origin
           cd gh-pages
           git add .
           git commit -m "Update GitHub Pages for $GITHUB_REF_NAME"
