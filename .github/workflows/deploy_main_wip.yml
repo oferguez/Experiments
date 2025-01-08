@@ -1,41 +1,46 @@
-name: Deploy Stable or WIP GitHub Pages
+name: Deploy GitHub Pages - WIP and MAIN
 
 on:
-  workflow_dispatch:
-
   push:
     branches:
       - main
       - wip
-  
+  workflow_dispatch: # Allow manual triggers
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # Build the site (replace this with your build process if needed)
-      - name: Build site
+      # Step 2: Clone the existing gh-pages branch
+      - name: Clone gh-pages branch
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git clone --branch gh-pages https://github.com/${{ github.repository }} gh-pages
+          mkdir -p gh-pages/public
+
+      # Step 3: Copy build output to the appropriate directory
+      - name: Prepare deployment
         run: |
           echo "Building site for branch $GITHUB_REF_NAME"
-          if [ "$GITHUB_REF_NAME" == "main" ]; then
-            mkdir -p public/stable
-            find . -maxdepth 1 -type f -exec cp {} public/stable/ \;  # Copy only files
-          elif [ "$GITHUB_REF_NAME" == "wip" ]; then
-            mkdir -p public/wip
-            find . -maxdepth 1 -type f -exec cp {} public/wip/ \;  # Copy only files
-          fi          
+          if [ "$GITHUB_REF_NAME" == "refs/heads/main" ]; then
+            mkdir -p gh-pages/public/stable
+            find . -maxdepth 1 -type f -exec cp {} gh-pages/public/stable/ \;  # Copy only files
+          elif [ "$GITHUB_REF_NAME" == "refs/heads/wip" ]; then
+            mkdir -p gh-pages/public/wip
+            find . -maxdepth 1 -type f -exec cp {} gh-pages/public/wip/ \;  # Copy only files
+          fi
+          ls -lR
 
-      # Deploy to the gh-pages branch
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: public
-          publish_branch: gh-pages
-          force_orphan: true
-          keep_files: true
+      # Step 4: Commit and push changes
+      - name: Commit and push
+        run: |
+          cd gh-pages
+          git add .
+          git commit -m "Update GitHub Pages for $GITHUB_REF_NAME"
+          git push origin gh-pages
