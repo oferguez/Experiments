@@ -30,30 +30,26 @@ jobs:
       - name: Prepare deployment
         run: |
           if [ "$GITHUB_REF_NAME" == "main" ]; then
-            echo MAIN
-            mkdir -p gh-pages/stable
+            echo Publishing MAIN
+            mkdir -p gh-pages
             find . -maxdepth 1 -type f -exec cp {} gh-pages/stable/ \;  # Copy only files
           elif [ "$GITHUB_REF_NAME" == "wip" ]; then
-            echo WIP
+            echo Publishing WIP
             mkdir -p gh-pages/wip
             find . -maxdepth 1 -type f -exec cp {} gh-pages/wip/ \;  # Copy only files
           else
             echo Error: publishing should be done from either main or wip
           fi
-          # echo "gh-pages after Building site for branch: $GITHUB_REF_NAME"
-          # pwd
-          # ls -lR
 
         # Step 4: Commit and push changes
       - name: Commit and push
         run: |
-            # pwd
-            cd gh-pages
             # Configure Git to use the GitHub token for authentication
             git config --global user.name "github-actions[bot]"
             git config --global user.email "github-actions[bot]@users.noreply.github.com"
             git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
             COMMIT_HASH=$(git rev-parse --short HEAD)
+            cd gh-pages
             git add .
             git commit --allow-empty -m "Update GitHub Pages for branch=$GITHUB_REF_NAME hash=$COMMIT_HASH"
             git push origin gh-pages
