@@ -1,0 +1,14 @@
+html, body {
+    height: 100%;
+}
+
+.Parent {
+    position: relative;
+    width: 75%;
+    height: 75%;
+    background-color: aquamarine;
+}
+
+.Child {
+    position: absolute;
+}
