@@ -1,3 +1,6 @@
+# Secrets
+sh_experiments/secrets
+
 # Logs
 logs
 *.log
