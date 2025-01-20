@@ -1,6 +1,7 @@
 .input {
     margin: 20px;
     height: 10px;
+    z-index: 100;
 }
 
 .container {
@@ -15,6 +16,7 @@
 .row {
     display: flex; /* Ensure each row aligns its boxes horizontally */
     justify-content: center; /* Optional: center boxes within the row */
+    pointer-events: none;
 }
 
 .box {
@@ -26,4 +28,6 @@
     overflow: hidden;
     white-space: normal;
     word-break: normal;
+    pointer-events: all;
+    z-index: 10;
 }
