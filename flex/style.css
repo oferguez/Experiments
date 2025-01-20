@@ -1,0 +1,31 @@
+.input {
+    margin: 20px;
+    height: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    justify-content: center;
+    /* align-items: center; */
+    /* margin-top: 20px; */
+    height: 100vh;
+    border: 3px solid red;
+    background-color: #53d6d0;
+}
+
+.row {
+    display: flex; /* Ensure each row aligns its boxes horizontally */
+    justify-content: center; /* Optional: center boxes within the row */
+}
+
+.box {
+    width: min(max(10x, 90vw / var(--size)), 50px);
+    height: min(max(10px, 90vw / var(--size)), 50px);
+    aspect-ratio: 1;
+    background-color: rgb(221, 66, 107);
+    border: 1px solid blue;
+    overflow: hidden;
+    white-space: normal;
+    word-break: normal;
+}
